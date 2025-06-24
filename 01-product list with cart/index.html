@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:ital,wght@0,300..900;1,300..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="shop-layout">
+        <section class="product-section">
+          <h1 class="section-title">Desserts</h1>
+          <div class="product-grid">
+            <div class="product-card">
+              <div class="product-media">
+                <img
+                  class="product-image"
+                  src="./images/image-waffle-desktop.jpg"
+                  alt=""
+                />
+                <button class="btn-add-to-cart">
+                  <img src="./images/icon-add-to-cart.svg" alt="" />
+                  Add to Cart
+                </button>
+              </div>
+              <p class="product-category">Waffle</p>
+              <p class="product-name">Waffle with Berries</p>
+              <p class="product-price">$6.50</p>
+            </div>
+            <div class="product-card">
+              <div class="product-media">
+                <img
+                  class="product-image"
+                  src="./images/image-waffle-desktop.jpg"
+                  alt=""
+                />
+                <button class="btn-add-to-cart">
+                  <img src="./images/icon-add-to-cart.svg" alt="" />
+                  Add to Cart
+                </button>
+              </div>
+              <p class="product-category">Waffle</p>
+              <p class="product-name">Waffle with Berries</p>
+              <p class="product-price">$6.50</p>
+            </div>
+          </div>
+        </section>
+
+        <aside class="cart-panel">
+          <h2 class="cart-title">Your cart (0)</h2>
+          <div class="cart-items">
+            <div class="cart-item">
+              <div class="cart-item-info">
+                <p class="cart-item-name">Vanilla</p>
+                <div class="cart-item-pricing">
+                  <span class="cart-qty">4x</span>
+                  <p class="cart-unit-price">$7</p>
+                  <p class="cart-total-price">$28</p>
+                </div>
+              </div>
+              <button class="btn-remove-item">
+                <img src="./images/icon-remove-item.svg" alt="" />
+              </button>
+            </div>
+          </div>
+
+          <div class="cart-summary">
+            <p class="summary-label">Order Total</p>
+            <p class="summary-price">$28</p>
+          </div>
+
+          <div class="delivery-note">
+            <img src="./images/icon-carbon-neutral.svg" alt="" />
+            <p>This is a <span>carbon-netural </span>delivery</p>
+          </div>
+          <button class="btn-confirm-order">Confirm Order</button>
+        </aside>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
