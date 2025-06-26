@@ -38,11 +38,17 @@ h1 {
   display: flex;
   flex-direction: column;
 }
+
 .product-image {
   width: 100%;
 
   border-radius: 5px;
 }
+
+.border {
+  border: 2px solid hsl(13, 50%, 40%);
+}
+
 .product-media {
   position: relative;
   width: 100%;
@@ -63,13 +69,51 @@ h1 {
   border-radius: 999px;
   background-color: white;
   color: hsl(0, 0%, 14%);
-  width: 140px;
+  width: 95px;
   cursor: pointer;
   font-weight: bolder;
 }
 .btn-add-to-cart:hover {
   color: hsl(13, 61%, 39%);
 }
+
+.quantity-control {
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.35rem 0.5rem;
+  font-size: 0.9rem;
+  background-color: hsl(13, 67%, 45%);
+  border: 1px solid hsl(13, 50%, 40%);
+  border-radius: 999px;
+  color: white;
+  width: 120px;
+  font-weight: bolder;
+}
+
+.btn-decrease,
+.btn-increase {
+  width: 20px;
+  height: 20px;
+  border: 2px solid white;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  padding: 0;
+}
+
+.btn-decrease:hover,
+.btn-increase:hover {
+  background-color: hsl(13, 61%, 39%);
+}
+
 .product-category {
   color: rgb(121, 104, 104);
   margin-top: 2rem;

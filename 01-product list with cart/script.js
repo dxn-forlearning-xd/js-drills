@@ -104,8 +104,8 @@ document.addEventListener('DOMContentLoaded', () => {
   desserts.forEach((dessert) => {
     const productGrid = document.querySelector('.product-grid');
 
-    const html = ` <div class="product-card">
-              <div class="product-media">
+    const html = ` <div class="product-card data-id="${dessert.name}">
+              <div class="product-media" >
                 <img
                   class="product-image"
                   src="${dessert.image.desktop}"
@@ -115,6 +115,13 @@ document.addEventListener('DOMContentLoaded', () => {
                   <img src="./images/icon-add-to-cart.svg" alt="" />
                   Add to Cart
                 </button>
+                <div class="quantity-control hidden">
+                  <button class="btn-decrease"><img src="./assets/images/icon-decrement-quantity.svg" alt=""></button>
+                 <span class="quantity">1</span>
+                 <button class="btn-increase">
+                  <img src="./assets/images/icon-increment-quantity.svg" alt="">
+                  </button>
+                 </div>
               </div>
               <p class="product-category">${dessert.category}</p>
               <p class="product-name">${dessert.name}</p>
@@ -123,3 +130,124 @@ document.addEventListener('DOMContentLoaded', () => {
     productGrid.insertAdjacentHTML('beforeend', html);
   });
 });
+
+document.addEventListener('click', (e) => {
+  if (e.target.classList.contains('btn-add-to-cart')) {
+    const controls = e.target.closest('.product-card');
+    const img = controls.querySelector('.product-image');
+    controls.querySelector('.btn-add-to-cart').classList.add('hidden');
+    img.classList.add('border');
+    controls.querySelector('.quantity-control').classList.remove('hidden');
+  }
+  const increaseBtn = e.target.closest('.btn-increase');
+  if (increaseBtn) {
+    const wrapper = increaseBtn.closest('.quantity-control');
+    const q = wrapper.querySelector('.quantity');
+    q.textContent = +q.textContent + 1;
+  }
+  const decreaseBtn = e.target.closest('.btn-decrease');
+  if (decreaseBtn) {
+    const wrapper = decreaseBtn.closest('.quantity-control');
+    const q = wrapper.querySelector('.quantity');
+    const current = +q.textContent;
+    if (current > 1) {
+      q.textContent = current - 1;
+    } else if (current === 1) {
+      wrapper.classList.add('hidden');
+      wrapper
+        .closest('.product-card')
+        .querySelector('.btn-add-to-cart')
+        .classList.remove('hidden');
+
+      wrapper
+        .closest('.product-card')
+        .querySelector('.product-image')
+        .classList.remove('border');
+    }
+  }
+});
+
+const cart = {};
+
+document.addEventListener('click', (e) => {
+  const increaseBtn = e.target.closest('.btn-increase');
+  const decreaseBtn = e.target.closest('.btn-decrease');
+
+  if (increaseBtn) {
+    const id = increaseBtn.dataset.id;
+    updateCart(id, +1);
+  }
+  if (decreaseBtn) {
+    const id = decreaseBtn.dataset.id;
+    updateCart(id, -1);
+  }
+});
+
+function updateCart(id, delta) {
+  if (!cart[id]) {
+    cart[id] = 0;
+  }
+  cart[id] += delta;
+  if (cart[id] <= 0) {
+    delete cart[id];
+  }
+
+  renderCart();
+}
+
+function renderCart() {
+  const itemsContainer = document.querySelector('.cart-items');
+  const emptyNotice = document.querySelector('.cart-empty');
+  const countDisplay = document.querySelector('.cart-count');
+  const totalDisplay = document.querySelector('.summary-price');
+
+  itemsContainer.innerHTML = ''; // 清空购物项
+  let totalCount = 0;
+  let totalPrice = 0;
+
+  // 遍历 cart 对象
+  for (const id in cart) {
+    const item = desserts.find((d) => d.name === id);
+    const quantity = cart[id];
+    const unitPrice = item.price;
+    const itemTotal = quantity * unitPrice;
+
+    // 拼接 HTML
+    const html = `
+      <div class="cart-item">
+        <div class="cart-item-info">
+          <p class="cart-item-name">${item.name}</p>
+          <div class="cart-item-pricing">
+            <span class="cart-qty">${quantity}x</span>
+            <p class="cart-unit-price">$${unitPrice}</p>
+            <p class="cart-total-price">$${itemTotal}</p>
+          </div>
+        </div>
+        <button class="btn-remove-item" data-id="${id}">
+          <img src="./assets/images/icon-remove-item.svg" alt="" />
+        </button>
+      </div>
+    `;
+    itemsContainer.insertAdjacentHTML('beforeend', html);
+
+    totalCount += quantity;
+    totalPrice += itemTotal;
+  }
+
+  // 更新空状态显示
+  if (totalCount === 0) {
+    emptyNotice.classList.remove('hidden');
+    document
+      .querySelectorAll('.cart-element')
+      .forEach((el) => el.classList.add('hidden'));
+  } else {
+    emptyNotice.classList.add('hidden');
+    document
+      .querySelectorAll('.cart-element')
+      .forEach((el) => el.classList.remove('hidden'));
+  }
+
+  // 更新标题里的数量和总价
+  countDisplay.textContent = totalCount;
+  totalDisplay.textContent = `$${totalPrice}`;
+}
