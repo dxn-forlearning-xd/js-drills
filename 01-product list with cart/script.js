@@ -101,24 +101,27 @@ const desserts = [
 ];
 
 document.addEventListener('DOMContentLoaded', () => {
+  renderCart();
   desserts.forEach((dessert) => {
     const productGrid = document.querySelector('.product-grid');
 
-    const html = ` <div class="product-card data-id="${dessert.name}">
+    const html = ` <div class="product-card " data-id="${dessert.name}">
               <div class="product-media" >
                 <img
                   class="product-image"
                   src="${dessert.image.desktop}"
                   alt=""
                 />
-                <button class="btn-add-to-cart">
-                  <img src="./images/icon-add-to-cart.svg" alt="" />
+                <button class="btn-add-to-cart" data-id="${dessert.name}"  >
+                  <img src="./assets/images/icon-add-to-cart.svg" alt="" />
                   Add to Cart
                 </button>
                 <div class="quantity-control hidden">
-                  <button class="btn-decrease"><img src="./assets/images/icon-decrement-quantity.svg" alt=""></button>
+                  <button class="btn-decrease" data-id="${
+                    dessert.name
+                  }" ><img src="./assets/images/icon-decrement-quantity.svg" alt=""></button>
                  <span class="quantity">1</span>
-                 <button class="btn-increase">
+                 <button class="btn-increase" data-id="${dessert.name}" >
                   <img src="./assets/images/icon-increment-quantity.svg" alt="">
                   </button>
                  </div>
@@ -132,11 +135,12 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 document.addEventListener('click', (e) => {
-  if (e.target.classList.contains('btn-add-to-cart')) {
+  addToCartBtn = e.target.closest('.btn-add-to-cart');
+  if (addToCartBtn) {
     const controls = e.target.closest('.product-card');
     const img = controls.querySelector('.product-image');
     controls.querySelector('.btn-add-to-cart').classList.add('hidden');
-    img.classList.add('border');
+    img.classList.add('outline');
     controls.querySelector('.quantity-control').classList.remove('hidden');
   }
   const increaseBtn = e.target.closest('.btn-increase');
@@ -162,7 +166,7 @@ document.addEventListener('click', (e) => {
       wrapper
         .closest('.product-card')
         .querySelector('.product-image')
-        .classList.remove('border');
+        .classList.remove('outline');
     }
   }
 });
@@ -170,16 +174,23 @@ document.addEventListener('click', (e) => {
 const cart = {};
 
 document.addEventListener('click', (e) => {
+  const addToCartBtn = e.target.closest('.btn-add-to-cart');
   const increaseBtn = e.target.closest('.btn-increase');
   const decreaseBtn = e.target.closest('.btn-decrease');
-
   if (increaseBtn) {
     const id = increaseBtn.dataset.id;
     updateCart(id, +1);
+    renderCart();
   }
   if (decreaseBtn) {
     const id = decreaseBtn.dataset.id;
     updateCart(id, -1);
+    renderCart();
+  }
+  if (addToCartBtn) {
+    const id = addToCartBtn.dataset.id;
+    updateCart(id, 1);
+    renderCart();
   }
 });
 
@@ -196,58 +207,85 @@ function updateCart(id, delta) {
 }
 
 function renderCart() {
-  const itemsContainer = document.querySelector('.cart-items');
-  const emptyNotice = document.querySelector('.cart-empty');
-  const countDisplay = document.querySelector('.cart-count');
-  const totalDisplay = document.querySelector('.summary-price');
+  console.log(cart);
+  const cartItemsContainer = document.querySelector('.cart-items');
+  const cartEmpty = document.querySelector('.cart-empty');
+  const cartElements = document.querySelectorAll('.cart-element');
+  const cartCount = document.querySelector('.cart-count');
+  const summaryPrice = document.querySelector('.summary-price');
 
-  itemsContainer.innerHTML = ''; // 清空购物项
+  cartItemsContainer.innerHTML = '';
+
+  const ids = Object.keys(cart);
+  if (ids.length === 0) {
+    cartEmpty.classList.remove('hidden');
+    cartElements.forEach((el) => el.classList.add('hidden'));
+    cartCount.textContent = 0;
+    return;
+  }
+
+  let total = 0;
   let totalCount = 0;
-  let totalPrice = 0;
 
-  // 遍历 cart 对象
-  for (const id in cart) {
-    const item = desserts.find((d) => d.name === id);
+  ids.forEach((id) => {
     const quantity = cart[id];
-    const unitPrice = item.price;
-    const itemTotal = quantity * unitPrice;
+    const product = desserts.find((item) => item.name === id);
+    if (!product) return;
 
-    // 拼接 HTML
-    const html = `
+    const itemHTML = `
       <div class="cart-item">
         <div class="cart-item-info">
-          <p class="cart-item-name">${item.name}</p>
+          <p class="cart-item-name">${product.name}</p>
           <div class="cart-item-pricing">
             <span class="cart-qty">${quantity}x</span>
-            <p class="cart-unit-price">$${unitPrice}</p>
-            <p class="cart-total-price">$${itemTotal}</p>
+            <p class="cart-unit-price">$${product.price.toFixed(2)}</p>
+            <p class="cart-total-price">$${(product.price * quantity).toFixed(
+              2
+            )}</p>
           </div>
         </div>
-        <button class="btn-remove-item" data-id="${id}">
+        <button class="btn-remove-item" data-id="${product.name}">
           <img src="./assets/images/icon-remove-item.svg" alt="" />
         </button>
       </div>
     `;
-    itemsContainer.insertAdjacentHTML('beforeend', html);
 
+    cartItemsContainer.innerHTML += itemHTML;
+    total += product.price * quantity;
     totalCount += quantity;
-    totalPrice += itemTotal;
-  }
+  });
 
-  // 更新空状态显示
-  if (totalCount === 0) {
-    emptyNotice.classList.remove('hidden');
-    document
-      .querySelectorAll('.cart-element')
-      .forEach((el) => el.classList.add('hidden'));
-  } else {
-    emptyNotice.classList.add('hidden');
-    document
-      .querySelectorAll('.cart-element')
-      .forEach((el) => el.classList.remove('hidden'));
-  }
-
-  // 更新标题里的数量和总价
-  countDisplay.textContent = totalCount;
-  totalDisplay.textContent = `$${totalPrice}`;
+  cartEmpty.classList.add('hidden');
+  cartElements.forEach((el) => el.classList.remove('hidden'));
+  cartCount.textContent = totalCount;
+  summaryPrice.textContent = `$${total.toFixed(2)}`;
 }
+
+document.addEventListener('click', (e) => {
+  const btnRemoveItem = e.target.closest('.btn-remove-item');
+  if (btnRemoveItem) {
+    const id = btnRemoveItem.dataset.id;
+    delete cart[id];
+    renderCart();
+
+    const card = document.querySelector(`.product-card[data-id='${id}']`);
+    if (card) {
+      card.querySelector('.quantity-control').classList.add('hidden');
+      card.querySelector('.btn-add-to-cart').classList.remove('hidden');
+      card.querySelector('.quantity').textContent = '1';
+      card.querySelector('.product-card img').classList.remove('outline');
+    }
+  }
+});
+
+document.querySelector('.btn-confirm-order').addEventListener('click', () => {
+  document.querySelector('.modal-overlay').classList.remove('hidden');
+});
+
+// const modalContent = document.querySelector('modal-box');
+
+// document.querySelector('.btn-new-order').addEventListener('click', () => {
+//   document.querySelector('.modal-overlay').classList.add('hidden');
+
+//   renderCart();
+// });
