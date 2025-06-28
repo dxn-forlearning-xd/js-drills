@@ -280,12 +280,78 @@ document.addEventListener('click', (e) => {
 
 document.querySelector('.btn-confirm-order').addEventListener('click', () => {
   document.querySelector('.modal-overlay').classList.remove('hidden');
+  renderModal();
 });
 
-// const modalContent = document.querySelector('modal-box');
+function renderModal() {
+  const modalContent = document.querySelector('.modal-box');
+  modalContent.innerHTML = '';
+  let total = 0;
+  let itemsHTML = '';
+  for (const id in cart) {
+    const qty = cart[id];
+    const product = desserts.find((item) => item.name === id);
 
-// document.querySelector('.btn-new-order').addEventListener('click', () => {
-//   document.querySelector('.modal-overlay').classList.add('hidden');
+    if (!product) continue;
+    total += product.price * qty;
+    itemsHTML += `<div class="order-item">
+              <img
+                src="${product.image.thumbnail}"
+                alt=""
+                class="item-thumbnail"
+              />
+              <div class="item-info">
+                <p class="item-name">${product.name}</p>
+                <div class="item-pricing">
+                  <span class="item-qty">${qty}x</span>
+                  <span class="item-unit-price">$${product.price}</span>
+                </div>
+              </div>
+              <span class="item-total-price">$${(product.price * qty).toFixed(
+                2
+              )}</span>
+            </div>`;
+  }
+  const fullHTML = `
+        <img
+          src="./assets/images/icon-order-confirmed.svg"
+          alt=""
+          class="modal-icon"
+        />
+        <h1 class="modal-title">Order order-confirmed</h1>
+        <p class="modal-subtitle">We hope you enjoy your food!</p>
+        <div class="order-summary-block">
+          <div class="order-items">
+            ${itemsHTML}
+          </div>
+          <div class="order-summary">
+            <span class="summary-label">Order Total</span>
+            <span class="summary-price">$${total.toFixed(2)}</span>
+          </div>
+        </div>
 
-//   renderCart();
-// });
+        <div class="btn-new-order">Start New Order</div>
+      `;
+  modalContent.innerHTML = fullHTML;
+}
+
+document.addEventListener('click', (e) => {
+  const newOrderBtn = e.target.closest('.btn-new-order');
+  if (!newOrderBtn) return;
+
+  document.querySelector('.modal-overlay').classList.add('hidden');
+
+  document.querySelectorAll('.product-card').forEach((card) => {
+    card.querySelector('.btn-add-to-cart').classList.remove('hidden');
+    card.querySelector('.quantity-control').classList.add('hidden');
+    card.querySelector('.quantity').textContent = '1';
+    const img = card.querySelector('.product-image');
+    if (img) img.classList.remove('outline');
+  });
+
+  for (const id in cart) {
+    delete cart[id];
+  }
+
+  renderCart();
+});

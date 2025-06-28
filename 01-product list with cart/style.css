@@ -318,6 +318,10 @@ button {
   gap: 1rem;
 }
 
+.order-item:not(:last-child) {
+  border-bottom: 1px solid hsla(0, 0%, 88%, 0.893);
+}
+
 .item-thumbnail {
   width: 60px;
   height: 60px;
@@ -392,11 +396,24 @@ button {
   display: none;
 }
 
-.btn-new-order,
+.btn-new-order:hover,
 .btn-confirm-order:hover {
   background-color: hsl(13, 69%, 30%);
 }
 
 button {
   transition: all 0.3s;
+}
+
+@media (max-width: 768px) {
+  .shop-layout {
+    flex-direction: column;
+  }
+  .product-grid {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    padding: 2rem;
+  }
+  .cart-panel {
+    margin: 2rem;
+  }
 }
