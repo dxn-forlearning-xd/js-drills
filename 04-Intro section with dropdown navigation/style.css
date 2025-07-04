@@ -1,0 +1,102 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Epilogue', sans-serif;
+}
+
+button {
+  all: unset;
+  cursor: pointer;
+}
+
+li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+.wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  height: 100vh;
+}
+
+.logo {
+  width: 100px;
+  height: 35px;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+}
+
+.menu {
+  display: flex;
+  gap: 2rem;
+}
+
+.menu li {
+  position: relative;
+}
+
+.navbar-left {
+  display: flex;
+  gap: 5rem;
+}
+
+.register-btn {
+  border-radius: 10px;
+  margin-left: 3rem;
+  padding: 0.5rem 1rem;
+  background-color: white;
+  border: 1px solid rgb(115, 115, 115);
+}
+
+.hero-section {
+  padding-top: 3rem;
+}
+
+.hero-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  gap: 5rem;
+  padding: 5rem;
+}
+
+.hero-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.hero-title {
+  font-size: 5rem;
+  margin-bottom: 2rem;
+}
+
+.hero-cta {
+  margin: 2rem 0 4rem 0;
+  background-color: black;
+  display: inline-block;
+  border-radius: 8px;
+  padding: 0.8rem 1rem;
+  color: white;
+}
+
+.hero-clients {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.hero-img {
+  max-height: 500px;
+  height: auto;
+  object-fit: contain;
+}
