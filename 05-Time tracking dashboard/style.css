@@ -49,6 +49,8 @@ h1 {
 
 .avatar {
   width: 70px;
+  border-radius: 50%;
+  border: 3px solid white;
 }
 
 .timeframe-btn {
@@ -69,6 +71,7 @@ h1 {
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  min-width: 140px;
 }
 
 .card-header {
@@ -76,7 +79,7 @@ h1 {
   border-radius: 0.5rem 0.5rem 0 0;
   z-index: 1;
   text-align: right;
-  height: 40px;
+  height: 50px;
 }
 
 .card-body {
@@ -87,7 +90,7 @@ h1 {
   padding: 1rem;
   transition: all 0.1s;
   transform: translateY(-1rem);
-  height: 150px;
+  height: 140px;
 }
 
 .card-body:hover {
@@ -107,6 +110,13 @@ h1 {
   cursor: pointer;
 }
 
+.activity-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 1.2rem;
+}
+
 .title {
   color: white;
   font-size: 0.7rem;
@@ -116,6 +126,7 @@ h1 {
   font-size: 2rem;
   color: white;
   font-weight: 300;
+  padding-bottom: 0.5rem;
 }
 
 .previous-hours {
@@ -127,4 +138,28 @@ h1 {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1rem;
+}
+
+.bg-work {
+  background-color: hsl(15, 100%, 70%);
+}
+
+.bg-play {
+  background-color: hsl(195, 74%, 62%);
+}
+
+.bg-study {
+  background-color: hsl(348, 100%, 68%);
+}
+
+.bg-exercise {
+  background-color: hsl(145, 58%, 55%);
+}
+
+.bg-social {
+  background-color: hsl(264, 64%, 52%);
+}
+
+.bg-self-care {
+  background-color: hsl(43, 84%, 65%);
 }
