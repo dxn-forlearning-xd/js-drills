@@ -1,0 +1,130 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: 'dm sans', sans-serif;
+}
+button {
+  all: unset;
+}
+body {
+  background-color: hsl(226, 43%, 10%);
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.wrapper {
+  display: flex;
+}
+
+h1 {
+  color: white;
+  font-weight: 200;
+}
+.report-label {
+  color: hsl(235, 57%, 77%);
+  font-size: 0.9rem;
+  margin-top: 1rem;
+}
+.profile-card {
+  margin-right: 1rem;
+}
+.profile-header {
+  background-color: hsl(246, 80%, 60%);
+  border-radius: 1rem;
+  padding: 2rem;
+  position: relative;
+  z-index: 2;
+}
+
+.timeframe-selector {
+  display: flex;
+  flex-direction: column;
+  background-color: hsl(235, 46%, 20%);
+  padding: 1rem;
+  margin-top: -1rem;
+  border-radius: 0 0 1rem 1rem;
+}
+
+.avatar {
+  width: 70px;
+}
+
+.timeframe-btn {
+  color: hsl(235, 45%, 61%);
+  cursor: pointer;
+  margin: 0.5rem;
+  transition: color 0.1s;
+}
+.timeframe-btn:hover {
+  color: white;
+}
+
+.active {
+  color: white;
+}
+
+.activity-card {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-header {
+  background-color: hsl(15, 100%, 70%);
+  border-radius: 0.5rem 0.5rem 0 0;
+  z-index: 1;
+  text-align: right;
+  height: 40px;
+}
+
+.card-body {
+  background-color: hsl(235, 46%, 20%);
+  border-radius: 0.5rem;
+  z-index: 2;
+  position: relative;
+  padding: 1rem;
+  transition: all 0.1s;
+  transform: translateY(-1rem);
+  height: 150px;
+}
+
+.card-body:hover {
+  background-color: hsl(237, 37%, 31%);
+  cursor: pointer;
+}
+
+.logo {
+  width: 40px;
+  margin-right: 0.5rem;
+  overflow: hidden;
+}
+
+.icon {
+  font-weight: bolder;
+  color: hsl(236, 100%, 87%);
+  cursor: pointer;
+}
+
+.title {
+  color: white;
+  font-size: 0.7rem;
+}
+
+.current-hours {
+  font-size: 2rem;
+  color: white;
+  font-weight: 300;
+}
+
+.previous-hours {
+  color: hsl(236, 100%, 87%);
+  font-size: 0.7rem;
+}
+
+.dashboard {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
