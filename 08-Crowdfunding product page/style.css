@@ -111,7 +111,7 @@ p {
   transition: background-color 0.2s ease;
 }
 
-.btn-bookmark img {
+.btn-bookmark svg {
   margin-right: 0.5rem;
 }
 
@@ -119,17 +119,16 @@ p {
   background-color: hsl(0, 0%, 90%);
 }
 
-.btn-bookmark:hover .bookmark-icon {
-  background-color: hsl(0, 0%, 30%);
-}
-
 .btn-bookmark.active {
   background: hsl(176, 50%, 92%);
   color: hsl(176, 50%, 47%);
 }
 
-.btn-bookmark.active .bookmark-icon {
-  background-color: hsl(176, 50%, 47%);
+.btn-bookmark.active .icon-bg {
+  fill: hsl(176, 50%, 47%);
+}
+.btn-bookmark.active .icon-mark {
+  fill: hsl(0, 0%, 100%);
 }
 
 .btn-primary:hover,
@@ -379,6 +378,10 @@ p {
   border-color: hsl(176, 50%, 47%);
 }
 
+.pledge-option.active {
+  border-color: hsl(176, 50%, 47%);
+}
+
 .pledge-inner {
   display: flex;
   align-items: flex-start;
@@ -406,6 +409,12 @@ p {
 
 .pledge-title {
   color: hsl(0, 0%, 20%);
+  transition: color 0.2s ease;
+}
+
+.pledge-title:hover {
+  color: hsl(176, 50%, 47%);
+  cursor: pointer;
 }
 
 .pledge-amount {
@@ -583,4 +592,8 @@ p {
 .out-of-stock {
   opacity: 0.5;
   pointer-events: none;
+}
+
+.hidden {
+  display: none;
 }
