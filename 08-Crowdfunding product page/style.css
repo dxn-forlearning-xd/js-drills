@@ -244,10 +244,6 @@ p {
   cursor: not-allowed;
 }
 
-.out-of-stock {
-  opacity: 0.6;
-}
-
 .success-modal {
   position: fixed;
   top: 0;
@@ -587,11 +583,6 @@ p {
 
 .btn-confirm:hover {
   background: hsl(176, 72%, 28%);
-}
-
-.out-of-stock {
-  opacity: 0.5;
-  pointer-events: none;
 }
 
 .hidden {
