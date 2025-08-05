@@ -1,0 +1,240 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+button {
+  all: unset;
+}
+
+body {
+  background-color: rgb(232, 234, 241);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 10rem;
+  max-width: 800px;
+  margin: 5rem 0 5rem 0;
+  padding: 1rem;
+}
+
+.comment {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 800px;
+}
+
+.main-content {
+  padding: 2rem;
+  background-color: white;
+  gap: 2rem;
+  display: flex;
+  border-radius: 10px;
+  margin: 1rem 0 1rem 0;
+}
+
+.reply {
+}
+
+.comment-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.username {
+  font-weight: bolder;
+}
+
+.time {
+  color: rgb(161, 161, 161);
+}
+
+.comment-content {
+  color: rgb(102, 102, 102);
+}
+
+.score-box {
+  background-color: rgb(239, 242, 244);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem;
+  border-radius: 5px;
+}
+
+.score-box p {
+  color: rgb(43, 43, 132);
+  font-weight: bolder;
+}
+
+.avatar {
+  width: 40px;
+}
+
+.operations-btn {
+  display: flex;
+  gap: 1rem;
+}
+
+.reply-btn,
+.edit-btn,
+.delete-btn {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.delete-btn {
+  color: rgb(220, 40, 40);
+}
+.reply-btn,
+.edit-btn {
+  color: rgb(50, 50, 148);
+}
+
+.replies {
+  position: relative;
+  margin-left: 2rem;
+  padding-left: 1rem;
+}
+
+.replies::before {
+  content: '';
+  position: absolute;
+  top: 30px;
+  left: -15px;
+  width: 2px;
+  height: 80%;
+  background-color: hsl(0, 0%, 86%);
+}
+
+.add-comment {
+  background-color: white;
+  padding: 1rem;
+  margin-top: 1rem;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  width: 100%;
+  max-width: 800px;
+}
+
+.add-comment .avatar {
+  width: 40px;
+}
+
+.add-comment input {
+  flex: 1;
+  height: 100px;
+  padding: 0.75rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  outline: none;
+}
+
+.add-comment input:focus {
+  border-color: #5357b6;
+}
+
+.add-comment .send-btn {
+  background-color: #5357b6;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  cursor: pointer;
+}
+
+.add-comment .send-btn:hover {
+  background-color: #767ce0;
+}
+
+.modal-box {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 0.75rem;
+  max-width: 400px;
+  width: 90%;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+  font-family: sans-serif;
+}
+
+.delete-modal .title {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: hsl(212, 24%, 26%);
+  margin-bottom: 1rem;
+}
+
+.delete-modal .confirm {
+  color: hsl(211, 10%, 45%);
+  line-height: 1.5;
+  font-size: 0.95rem;
+  margin-bottom: 1.5rem;
+}
+
+.modal-operations {
+  display: flex;
+  gap: 1rem;
+}
+
+.confirm-cancel,
+.confirm-delete {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  border: none;
+  border-radius: 0.5rem;
+  background-color: hsl(211, 10%, 45%);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.confirm-delete {
+  background-color: hsl(358, 79%, 66%);
+}
+
+.confirm-cancel:hover {
+  background-color: hsl(211, 10%, 35%);
+}
+
+.confirm-delete:hover {
+  background-color: hsl(358, 79%, 55%);
+}
+
+.delete-modal {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.hidden {
+  display: none;
+}
